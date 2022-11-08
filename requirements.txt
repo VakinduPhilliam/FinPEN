@@ -1,0 +1,12 @@
+numpy==1.22.0
+cv2
+PIL
+base64
+pytesseract
+pytorch
+easyocr
+keras
+tensorflow
+matplotlib
+pandas
+scikit-learn

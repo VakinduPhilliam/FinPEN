@@ -1,0 +1,27 @@
+{
+  "name": "finpen",
+  "version": "1.0.0",
+  "description": "Fin PEN is an AI powered blockchain DApp built to convert real-world business contracts into tamper-proof smart contracts.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pyinstall": "npm install && pip -m -r requirements.txt"
+  },
+  "author": "Vakindu Philliam",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "bull": "^4.8.5",
+    "ejs": "^3.1.8",
+    "ethers": "^5.7.2",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "ioredis": "^5.2.2",
+    "node-fetch": "^2.6.7",
+    "redis": "^4.2.0",
+    "redis-json": "^6.0.3"
+  }
+}

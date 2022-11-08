@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	<!-- SEO -->
+	<title>Fin PEN - Financial Payment Elevation Network (Fin PEN).</title>
+	<meta name="description" content="Financial Payment Elevation Network (Fin PEN)."/>
+	<meta name="robots" content="index, follow" />
+	<meta name="referrer" content="always" />
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="32x32">
+
+	<!-- Styles -->
+	<link rel='stylesheet' href='assets/css/me.css' type='text/css' media='screen' />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+	<style>
+		.container { width: 100%;}
+    </style>
+
+</head>
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/chart.js"></script>
+<script src="assets/js/upload.js"></script>
+<body id="fullsingle" class="page-template-page-fullsingle-me">
+
+	<table width="100%" height="80%" border="0">
+	<tr>
+	<td colspan="3">
+	</br>
+	</td>
+	</tr>
+	<tr>
+	<td width="15%"></td>
+	<td width="70%">
+
+
+	<!-- Content Container -->
+	
+		<div class="logo">
+			
+			<a href="#"><img src="assets/images/logo.png" alt="Logo"/></a>
+
+		</div>
+
+		<table width="100%" height="100%" border="0">
+		<tr>
+		<td align='center' width='50%' bgcolor="grey">
+		<font size='5' color="white">Upload a business contract image</font></br>
+
+		<form name="MyForm" onsubmit="fileUpload(this);return false;">
+            <p><font size='2' color="black"><i> JPEG/JPG and PNG formats ONLY, Max size 3MB. </i></font></p>
+            <font size='5' color="black">
+				<input type="file" name="file" id="player-img" required>
+			</font>
+			
+		    </br>
+		    </br>
+            <input class="btn-solid-lg" name="submitbtn" id="submit" type="submit" value=" + UPLOAD CONTRACT " onclick="javascript:document.MyForm.submitbtn.value=' PROCESSING CONTRACT, PLEASE WAIT .... '">
+        </form>
+		</br>
+		</td>
+		<td align="center" width='50%' bgcolor="white">
+		<font size='5'>Contract Analysis Results</font></br>
+		<hr>
+		
+
+		<script type="text/javascript">
+  
+			window.onload=function(){
+			
+			$(document).ready(()=>{
+			
+			$.getJSON('http://localhost:6006/graph')
+			
+			.done((items)=>{
+			
+			   var labels = [], data=[];
+			
+				$.each(items, (key, val) =>{
+			
+					labels.push(items[key].logs.timestamp); // tPartition transitions
+					if (Object.keys(items[key].results).length==1 && typeof Object.values(items[key].results)[0]=='number') {
+					  data.push(Object.values(items[key].results)[0]); // Results found
+					} else {
+					  data.push(Object.keys(items[key].results).length); // Results found
+					}
+			
+				});
+			
+			var ctx = canvas.getContext('2d');
+			
+			var config = {
+			   type: 'line',
+			   data: {
+				  labels: labels,
+				  datasets: [{
+					 label: 'Contract Valuations:',
+					 data: data,
+					 borderColor: "#000066",
+					 backgroundColor: 'rgba(0, 0, 0, 0.1)',
+					 //backgroundColor: 'rgba(0, 119, 204, 0.3)'
+				  }]
+			   },
+				options: {
+					legend:{
+					  labels:{
+						boxWidth:23
+					  } 
+					},
+					scales: {
+						xAxes: [{
+							display: true,
+							scaleLabel: {
+								display: true,
+								labelString: 'Signing Dates (D/M/Y)'
+							},
+						}],
+						yAxes: [{
+						  display: true,
+						  scaleLabel: {
+							display: true,
+							labelString: 'Valuation Totals (USD)'
+						  },
+						}]
+					}
+				}
+			};
+			
+			var chart = new Chart(ctx, config);
+			
+			})
+			
+			.fail(()=>{
+			
+				document.write("Problem processing data file.");
+			
+			});
+			});
+			
+			}
+			
+		</script>
+
+        <center>
+			<div class="container">
+				<canvas id="canvas"  width="250px" height="160px"></canvas>
+			</div>
+		</center>
+		
+		</td>
+	    </tr>
+	    </table>
+
+		<div class="network">
+
+		<ul>
+		</ul>
+
+		</div>
+
+
+		<font size='2'>&copy; <script>document.write(new Date().getFullYear());</script>, Financial Payment Elevation Network (Fin PEN). </font>
+
+
+	</td>
+	<td width="15%"></td>
+</tr>
+<tr>
+<td colspan="3"></td>
+</tr>
+</table>	
+
+</body>
+</html>
