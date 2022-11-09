@@ -10,12 +10,7 @@ const analyzerRoute = resolve('./routes/analyzer.py'); // Locate python app
 const Queue = require('bull'); // Queuing system
 const fetch = require('node-fetch'); // Data fetch feature
 const { ethers } = require("ethers");
-const provider = new ethers.providers.Web3Provider(window.ethereum)
-const signer = provider.getSigner()
-const contractAddress = '0xaa65AEf544822ba7Ce6F26Dd1627d02b258749B8';
-const ABI = '[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"getLatestContract","outputs":[{"internalType":"int256","name":"","type":"int256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"storeLatestContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"storedContract","outputs":[{"internalType":"int256","name":"","type":"int256"}],"stateMutability":"view","type":"function"}]'
-const contract = new ethers.Contract(contractAddress, ABI, signer);
-
+const detectEthereumProvider = require('@metamask/detect-provider');
 
 // Queue Worker
 const queueWorker = new Queue('queue_worker', {
@@ -166,6 +161,12 @@ app.get('/analysis', async (req, res) => {
         // Function to save data to Blockchain
         async function saveToBlockchain(saveData){
 
+            const provider = await detectEthereumProvider();
+            const signer = provider.getSigner()
+            const contractAddress = '0xaa65AEf544822ba7Ce6F26Dd1627d02b258749B8';
+            const ABI = '[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"getLatestContract","outputs":[{"internalType":"int256","name":"","type":"int256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"storeLatestContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"storedContract","outputs":[{"internalType":"int256","name":"","type":"int256"}],"stateMutability":"view","type":"function"}]'
+            const contract = new ethers.Contract(contractAddress, ABI, signer);
+
             // Save data to blockchain
             try {
                 const transaction = await contract.storeLatestContract();
@@ -176,6 +177,8 @@ app.get('/analysis', async (req, res) => {
             }
 
         }
+
+        // await saveToBlockchain(saveData)
         
     }
 

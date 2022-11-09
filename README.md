@@ -69,6 +69,10 @@ Install dependencies.
 
 </br>
 
+_cd chain_
+
+</br>
+
 _npm install_
 
 </br>
@@ -144,7 +148,7 @@ The Fin PEN Graph of the analysis will look like below.
 
 <br/>
 
-_Fin PEN User Interface with Analyzed Data Graph::_
+_Fin PEN User Interface with Analyzed Data Graph:_
 
 ![Fin PEN Data Graph](/docs/FinPIN_Graph.png)
 

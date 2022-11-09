@@ -1,11 +1,10 @@
 require("@nomicfoundation/hardhat-toolbox");
 
-
 //require("@nomiclabs/hardhat-ethers")
  require('dotenv').config()
 
  const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL || "https://eth-rinkeby.alchemyapi.io/v2/your-api-key"
- const PRIVATE_KEY = process.env.PRIVATE_KEY || "abcdef"
+ const PRIVATE_KEY = process.env.PRIVATE_KEY || "xcxxxvx"
  
 
  module.exports = {
