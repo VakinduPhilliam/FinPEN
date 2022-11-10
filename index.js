@@ -11,6 +11,8 @@ const Queue = require('bull'); // Queuing system
 const fetch = require('node-fetch'); // Data fetch feature
 const { ethers } = require("ethers");
 const detectEthereumProvider = require('@metamask/detect-provider');
+//const TokenArtifact =resolve("./chain/Token.json");
+//const contractAddress =resolve("./chain/contract-address.json");
 
 // Queue Worker
 const queueWorker = new Queue('queue_worker', {
